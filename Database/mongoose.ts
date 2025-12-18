@@ -20,7 +20,7 @@ if (!cached) {
 
 
 export const connectToDatabase = async () => {
-  if (!MONGODB_URI) throw new Error('MONGODB_URI is not set')
+  if (!MONGODB_URI) throw new Error('MONGODB_URI is not set within .env')
 
     if(cached.conn) return cached.conn;
 
@@ -31,7 +31,7 @@ export const connectToDatabase = async () => {
 
     try {
         cached.conn=await cached.promise;
-        return cached.conn;
+        
         
     } catch (err) {
         cached.promise=null;
@@ -41,5 +41,7 @@ export const connectToDatabase = async () => {
     }
 
     console.log(`connected to database ${process.env.NODE_ENV} ${MONGODB_URI}`)
+
+    return cached.conn;
 
 }

@@ -18,15 +18,19 @@ import {
 import { useRouter } from "next/navigation"
 import { LogOut } from "lucide-react"
 import Navitems from "./Navitems"
+import { auth } from "@/lib/better-auth/auth"
+import { signOut } from "better-auth/api"
+import { signout } from "@/lib/actions/auth.action"
 
-export function UserDropdown() {
+export function UserDropdown({user}:{user:User}) {
     const router =useRouter();
 
     const handleSignout=async()=>{
+        await signout()
         router.push('/sign-in');
     }
 
-    const user={name:'dev',email:'dev@example.com'}
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
